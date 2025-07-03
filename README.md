@@ -1,6 +1,6 @@
 *[This repository was taken from the Cal Poly, Fall 2024 group for CSC 307.]*
 
-freeloaders is an app designed to simplify finding free food distributed on campus for students & to attract footfall to events for on-campus organizations.
+an app designed to simplify finding free food distributed on campus for students & to attract footfall to events for on-campus organizations.
 
 made with ❤️ by Wingsum Siu, Reenu Kutty, Suhanth Alluri, Dennis Kulik, Rishit Gupta
 
