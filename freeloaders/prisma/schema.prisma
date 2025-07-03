@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+model Student {
+  id            Int     @id @default(autoincrement())
+  display_name  String
+  password      String
+  calpoly_email String
+  profile_photo String? // Assuming image URL is stored as a string
+  comments      Comment[]
+}
+
+model Comment {
+  id      Int     @id @default(autoincrement())
+  text    String
+  student Student @relation(fields: [studentId], references: [id])
+  studentId Int
+  event   Event   @relation(fields: [eventId], references: [id])
+  eventId Int
+}
+
+model Organization {
+  id               Int     @id @default(autoincrement())
+  display_name     String
+  organization_email String
+  password         String
+  point_of_contact String
+  description      String
+  profile_photo    String? // Assuming image URL is stored as a string
+  cover_photo      String? // Assuming image URL is stored as a string
+  events           Event[]
+}
+
+model Event {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  food_type   String
+  quantity    String
+  location    String?    // optional desc (like floor, room num, etc)
+  location_select String // hardcoded options for filtering ease
+  latitude    Float   
+  longitude   Float
+  start_time  DateTime
+  end_time    DateTime
+  photo       String? // Assuming image URL is stored as a string
+  organization Organization @relation(fields: [organizationId], references: [id])
+  organizationId Int
+  comments    Comment[]
+}
